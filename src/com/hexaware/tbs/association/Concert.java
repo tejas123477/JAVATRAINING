@@ -41,5 +41,6 @@ public class Concert extends Event {
         super.display_event_details();
         System.out.println("Artist: " + artistName);
         System.out.println("Genre: " + genre);
+        System.out.println("hello");
     }
 }
