@@ -1,0 +1,43 @@
+CREATE DATABASE TicketBookingSystem;
+USE TicketBookingSystem;
+
+CREATE TABLE Venue(
+	venue_id INT PRIMARY KEY,
+    venue_name VARCHAR(50),
+    address VARCHAR(100)
+    );
+    
+CREATE TABLE Event(
+	event_id INT PRIMARY KEY NOT NULL,
+    event_name VARCHAR(50),
+    event_date DATE,
+    event_time TIME,
+    venue_id INT,
+    total_seats INT,
+    available_seats INT,
+    ticket_price DECIMAL(7,2),
+    event_type ENUM('Movie', 'Sports', 'Concert')
+    );
+
+CREATE TABLE Customer(
+	customer_id INT PRIMARY KEY,
+    customer_name VARCHAR(30),
+    email VARCHAR(30),
+    phone_number VARCHAR(10)
+    );
+    
+CREATE TABLE Booking(
+	booking_id INT PRIMARY KEY,
+    customer_id INT,
+    event_id INT,
+    num_tickets INT,
+    total_cost INT,
+    booking_date DATE
+    );
+
+ALTER TABLE Event
+ADD FOREIGN KEY (venue_id) REFERENCES Venue(venue_id);
+
+ALTER TABLE Booking
+ADD FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),
+ADD FOREIGN KEY (event_id) REFERENCES Event(event_id);
